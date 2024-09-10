@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class StageSelectScript : MonoBehaviour
 {
     public Image fadeImage;
-
     public float fadeDuration = 20.0f;//フェードアウトの時間
     private bool isFading = false;
 
