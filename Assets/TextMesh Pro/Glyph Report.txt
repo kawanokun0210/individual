@@ -1,15 +1,0 @@
-Font: BIZ UDGothic  Style: Bold
-Point Size: 20   SP/PD Ratio: 25.0%
-
-Characters included: 318/320
-Missing characters: 2
-Excluded characters: 0
-
-Characters missing from font file:
-----------------------------------------
-ID: 13	Hex: D	Char []
-ID: 10	Hex: A	Char [
-]
-
-Characters excluded from packing:
-----------------------------------------
