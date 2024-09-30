@@ -10,7 +10,11 @@ public class FadeScript : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 20.0f;//フェードアウトの時間
     private bool isFading = false;
-    
+
+    //Audio系の宣言
+    public AudioSource bgm;
+    public AudioSource se;
+
     void Start()
     {
         //最初にフェードを解除する
@@ -22,6 +26,12 @@ public class FadeScript : MonoBehaviour
         //スペースキーが押されたらフェードアウトを開始
         if (Input.GetKeyDown(KeyCode.Space) && !isFading || Input.GetButtonDown("Fire1") && !isFading)
         {
+            //BGMが流れていたらBGMを止める
+            if (bgm.isPlaying)
+            {
+                bgm.Stop();
+            }
+            se.Play();
             GameStartScript.blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
         }
