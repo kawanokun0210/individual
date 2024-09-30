@@ -40,6 +40,9 @@ public class playerScript : MonoBehaviour
     //回復
     bool isHeel = false;
 
+    //Audio系の宣言
+    public AudioSource healSE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -290,6 +293,7 @@ public class playerScript : MonoBehaviour
         {
             remainingHP++;
             isHeel = false;
+            healSE.Play();
 
             //ハートの表示個数を増やす
             for (int i = 0; i < hearts.Length; i++)
