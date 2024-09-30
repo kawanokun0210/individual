@@ -64,26 +64,14 @@ public class ClearScript : MonoBehaviour
         //縦の入力待ち
         float verticalInput = Input.GetAxis("Vertical");
 
+        //上下入力した際の処理の関数
         SelectInputUp(verticalInput);
         SelectInputDown(verticalInput);
 
-        if (stageSelect)
-        {
-            if (stageSelectCoroutine == null)
-            {
-                stageSelectCoroutine = StartCoroutine(BlinkText(stageSelectText));
-            }
-            StopBlinkCoroutine(ref backTitleCoroutine, backTitleText);
-        }
-        else if (backTitle)
-        {
-            if (backTitleCoroutine == null)
-            {
-                backTitleCoroutine = StartCoroutine(BlinkText(backTitleText));
-            }
-            StopBlinkCoroutine(ref stageSelectCoroutine, stageSelectText);
-        }
+        //文字の点滅をさせる関数
+        Blinking();
 
+        //決定した際にシーンを変更する関数
         SceneChange();
 
     }
@@ -136,6 +124,26 @@ public class ClearScript : MonoBehaviour
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
+        }
+    }
+
+    void Blinking()
+    {
+        if (stageSelect)
+        {
+            if (stageSelectCoroutine == null)
+            {
+                stageSelectCoroutine = StartCoroutine(BlinkText(stageSelectText));
+            }
+            StopBlinkCoroutine(ref backTitleCoroutine, backTitleText);
+        }
+        else if (backTitle)
+        {
+            if (backTitleCoroutine == null)
+            {
+                backTitleCoroutine = StartCoroutine(BlinkText(backTitleText));
+            }
+            StopBlinkCoroutine(ref stageSelectCoroutine, stageSelectText);
         }
     }
 
