@@ -11,6 +11,10 @@ public class StageSelectScript : MonoBehaviour
 
     private StageSelectPlayer playerController;
 
+    //Audio系の宣言
+    public AudioSource bgm;
+    public AudioSource se;
+
     void Start()
     {
         //最初にフェードを解除する
@@ -32,6 +36,12 @@ public class StageSelectScript : MonoBehaviour
         //スペースキーが押されたらフェードアウトを開始
         if (Input.GetKeyDown(KeyCode.Space) && !isFading && playerController != null && StageSelectPlayer.firstStage || Input.GetButtonDown("Fire1") && !isFading && playerController != null && StageSelectPlayer.firstStage)
         {
+            //BGMが流れていたらBGMを止める
+            if (bgm.isPlaying)
+            {
+                bgm.Stop();
+            }
+            se.Play();
             StageSelectPlayer.isInput = false;
             StartCoroutine(FadeOutAndLoadScene("SampleScene"));
         }
@@ -39,6 +49,12 @@ public class StageSelectScript : MonoBehaviour
         //スペースキーが押されたらフェードアウトを開始
         if (Input.GetKeyDown(KeyCode.Space) && !isFading && playerController != null && StageSelectPlayer.secondStage || Input.GetButtonDown("Fire1") && !isFading && playerController != null && StageSelectPlayer.secondStage)
         {
+            //BGMが流れていたらBGMを止める
+            if (bgm.isPlaying)
+            {
+                bgm.Stop();
+            }
+            se.Play();
             StageSelectPlayer.isInput = false;
             StartCoroutine(FadeOutAndLoadScene("SecondStageScene"));
         }
