@@ -41,6 +41,9 @@ public class playerScript : MonoBehaviour
     //回復
     bool isHeel = false;
 
+    float rayDistance = 0.5f;
+    private bool isBlock = true;
+
     //Audio系の宣言
     public AudioSource healSE;
 
@@ -57,6 +60,23 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //プレイヤーの下方向へレイを出す
+        Vector3 rayPosition = transform.position + new Vector3(0,0.5f,0);
+        Ray ray = new Ray(rayPosition, Vector3.down);
+
+        Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
+
+        isBlock = Physics.Raycast(ray, rayDistance);
+
+        if (isBlock == true)
+        {
+            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
+        }
+        else
+        {
+            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.blue);
+        }
+
         //水平方向の入力を取得し、それぞれの移動速度をかける。
         float Xvalue = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -101,11 +121,8 @@ public class playerScript : MonoBehaviour
         //ブロックと当たっているとき
         if (collision.gameObject.tag == "Block")
         {
-            //重力無効
-            rb.isKinematic = false;
             //ジャンプの判断(falseはしていない)
             isJump = false;
-            isHitBlock = true;
             //アニメーションを変更。
             animator.SetBool("jump", false);
             //アニメーションを変更。
@@ -113,11 +130,30 @@ public class playerScript : MonoBehaviour
             //アニメーションを変更。
             animator.SetBool("jumpping", false);
             //アニメーションを変更。
-            animator.SetBool("landing", false);
+            animator.SetBool("landing", true);
         }
-        else
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //ブロックと当たっているとき
+        if (collision.gameObject.tag == "Block")
         {
-            isHitBlock = false;
+            //重力無効
+            rb.isKinematic = false;
+            isHitBlock = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        //ブロックと当たっているとき
+        if (collision.gameObject.tag == "Block")
+        {
+            if (!isJump)
+            {
+                isHitBlock = false;
+            }
         }
     }
 
@@ -255,11 +291,12 @@ public class playerScript : MonoBehaviour
             //アニメーションを変更。
             animator.SetBool("jumpping", true);
         }
-        else if (isJump && rb.velocity.y < 0)
+        
+        if (isJump && rb.velocity.y < 0)
         {
-            Debug.Log("1");
             //アニメーションを変更。
             animator.SetBool("fall", true);
+            Debug.Log(animator.GetBool("fall"));
         }
 
     }
