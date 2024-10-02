@@ -22,6 +22,7 @@ public class playerScript : MonoBehaviour
     Rigidbody rb;
     float jumpPower = 8.2f;
     bool isJump = false;
+    bool isHitBlock = true;
     //待機モーション
     int waitTimer = 0;
     //体力系
@@ -104,8 +105,19 @@ public class playerScript : MonoBehaviour
             rb.isKinematic = false;
             //ジャンプの判断(falseはしていない)
             isJump = false;
+            isHitBlock = true;
             //アニメーションを変更。
             animator.SetBool("jump", false);
+            //アニメーションを変更。
+            animator.SetBool("fall", false);
+            //アニメーションを変更。
+            animator.SetBool("jumpping", false);
+            //アニメーションを変更。
+            animator.SetBool("landing", false);
+        }
+        else
+        {
+            isHitBlock = false;
         }
     }
 
@@ -237,6 +249,19 @@ public class playerScript : MonoBehaviour
             //アニメーションを変更。
             animator.SetBool("attack", false);
         }
+
+        if (isJump && rb.velocity.y > 0)
+        {
+            //アニメーションを変更。
+            animator.SetBool("jumpping", true);
+        }
+        else if (isJump && rb.velocity.y < 0)
+        {
+            Debug.Log("1");
+            //アニメーションを変更。
+            animator.SetBool("fall", true);
+        }
+
     }
 
     //攻撃の関数
@@ -310,7 +335,7 @@ public class playerScript : MonoBehaviour
             }
 
         }
-        else if(isHeel && remainingHP > 3)
+        else if (isHeel && remainingHP > 3)
         {
             remainingHP = 3;
             isHeel = false;
@@ -326,9 +351,9 @@ public class playerScript : MonoBehaviour
             //体力を減らす
             remainingHP--;
             //ハートの表示個数を減らす
-            for(int i = 0; i < hearts.Length; i++)
+            for (int i = 0; i < hearts.Length; i++)
             {
-                if(i < remainingHP)
+                if (i < remainingHP)
                 {
                     hearts[i].SetActive(true);
                 }
@@ -367,6 +392,20 @@ public class playerScript : MonoBehaviour
         {
             isFall = true;
         }
+
+        //落下しているときに落下のアニメーションに切り替える
+        if (!isHitBlock && rb.velocity.y < 0)
+        {
+            //アニメーションを変更。
+            animator.SetBool("fall", true);
+        }
+        else
+        {
+            //アニメーションを変更。
+            animator.SetBool("fall", false);
+        }
+
+
     }
 
 }
