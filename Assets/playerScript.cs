@@ -60,23 +60,6 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //プレイヤーの下方向へレイを出す
-        Vector3 rayPosition = transform.position + new Vector3(0,0.5f,0);
-        Ray ray = new Ray(rayPosition, Vector3.down);
-
-        Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
-
-        isBlock = Physics.Raycast(ray, rayDistance);
-
-        if (isBlock == true)
-        {
-            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
-        }
-        else
-        {
-            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.blue);
-        }
-
         //水平方向の入力を取得し、それぞれの移動速度をかける。
         float Xvalue = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -114,6 +97,9 @@ public class playerScript : MonoBehaviour
         //落下の関数
         Fall();
 
+        //レイによる当たり判定
+        RayHit();
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -123,37 +109,6 @@ public class playerScript : MonoBehaviour
         {
             //ジャンプの判断(falseはしていない)
             isJump = false;
-            //アニメーションを変更。
-            animator.SetBool("jump", false);
-            //アニメーションを変更。
-            animator.SetBool("fall", false);
-            //アニメーションを変更。
-            animator.SetBool("jumpping", false);
-            //アニメーションを変更。
-            animator.SetBool("landing", true);
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        //ブロックと当たっているとき
-        if (collision.gameObject.tag == "Block")
-        {
-            //重力無効
-            rb.isKinematic = false;
-            isHitBlock = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        //ブロックと当たっているとき
-        if (collision.gameObject.tag == "Block")
-        {
-            if (!isJump)
-            {
-                isHitBlock = false;
-            }
         }
     }
 
@@ -201,6 +156,58 @@ public class playerScript : MonoBehaviour
             isHeel = true;
         }
 
+    }
+
+    void RayHit()
+    {
+        //プレイヤーの下方向へレイを出す
+        Vector3 rayPosition = transform.position + new Vector3(0, 0.5f, 0);
+        Ray ray = new Ray(rayPosition, Vector3.down);
+
+        Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
+
+        isBlock = Physics.Raycast(ray, rayDistance);
+
+        if (isBlock)
+        {
+            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
+
+            //重力無効
+            rb.isKinematic = false;
+
+            //ブロックにあたっていることにする
+            isHitBlock = true;
+
+            //ジャンプができる状態にする
+            isJump = false;
+
+            //アニメーションを変更。
+            animator.SetBool("fall", false);
+
+            //アニメーションを変更。
+            animator.SetBool("landing", true);
+
+            //攻撃アニメーションの状態を監視
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            //Attackがアニメーションのステート名と一致する場合
+            if (stateInfo.IsName("landing") && stateInfo.normalizedTime >= 1.0f)
+            {
+                animator.SetBool("landing", false);
+            }
+
+        }
+        else
+        {
+            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.blue);
+
+            //ブロックにあたっていないことにする
+            isHitBlock = false;
+
+            //ジャンプができる状態にする
+            isJump = true;
+
+        }
     }
 
     //最初のハートを作る関数
@@ -436,12 +443,6 @@ public class playerScript : MonoBehaviour
             //アニメーションを変更。
             animator.SetBool("fall", true);
         }
-        else
-        {
-            //アニメーションを変更。
-            animator.SetBool("fall", false);
-        }
-
 
     }
 
