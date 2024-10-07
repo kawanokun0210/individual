@@ -20,6 +20,7 @@ public class OverScript : MonoBehaviour
 
     public static float blinkInterval = 0.6f;//“_–ÅŠÔŠu
 
+    //“_–Å‚³‚¹‚é•¶Žš
     private Coroutine reStartCoroutine;
     private Coroutine stageSelectCoroutine;
     private Coroutine backTitleCoroutine;

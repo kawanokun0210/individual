@@ -104,11 +104,14 @@ public class playerScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //ブロックと当たっているとき
-        if (collision.gameObject.tag == "Block")
+        if(collision.gameObject.tag == "Block")
         {
-            //ジャンプの判断(falseはしていない)
+            //ジャンプができる状態にする
             isJump = false;
+
+            animator.SetBool("fall", false);
+            animator.SetBool("jumpping", false);
+            animator.SetBool("jump", false);
         }
     }
 
@@ -175,25 +178,15 @@ public class playerScript : MonoBehaviour
             //重力無効
             rb.isKinematic = false;
 
-            //ブロックにあたっていることにする
-            isHitBlock = true;
-
-            //ジャンプができる状態にする
-            isJump = false;
-
-            //アニメーションを変更。
-            animator.SetBool("fall", false);
-
-            //アニメーションを変更。
-            //animator.SetBool("landing", true);
-
             //攻撃アニメーションの状態を監視
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
             //Attackがアニメーションのステート名と一致する場合
-            if (stateInfo.IsName("landing") && stateInfo.normalizedTime >= 1.0f)
+            Debug.Log(stateInfo.IsName("landing") + "," + stateInfo.normalizedTime);
+            if (stateInfo.IsName("landing") && stateInfo.normalizedTime >= 0.5f)
             {
                 animator.SetBool("landing", false);
+                Debug.Log(animator.GetBool("landing"));
             }
 
         }
@@ -206,6 +199,9 @@ public class playerScript : MonoBehaviour
 
             //ジャンプができる状態にする
             isJump = true;
+
+            //アニメーションを変更
+            animator.SetBool("fall", true);
 
         }
     }
@@ -293,17 +289,20 @@ public class playerScript : MonoBehaviour
             animator.SetBool("attack", false);
         }
 
+        //Debug.Log(isJump + "," + rb.velocity.y);
+       
         if (isJump && rb.velocity.y > 0)
         {
             //アニメーションを変更。
             animator.SetBool("jumpping", true);
+            //Debug.Log(animator.GetBool("jumpping"));
         }
         
         if (isJump && rb.velocity.y < 0)
         {
             //アニメーションを変更。
             animator.SetBool("fall", true);
-            Debug.Log(animator.GetBool("fall"));
+            //Debug.Log(animator.GetBool("fall"));
         }
 
     }
@@ -436,14 +435,6 @@ public class playerScript : MonoBehaviour
         {
             isFall = true;
         }
-
-        //落下しているときに落下のアニメーションに切り替える
-        if (!isHitBlock && rb.velocity.y < 0)
-        {
-            //アニメーションを変更。
-            animator.SetBool("fall", true);
-        }
-
     }
 
 }
