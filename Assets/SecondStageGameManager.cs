@@ -28,6 +28,12 @@ public class SecondStageGameManager : MonoBehaviour
     public float fadeDuration = 1.0f;//フェードアウトの時間
     private bool isFading = false;
 
+    //回転スピード
+    [SerializeField]
+    private float rotateSpeed = 0.5f;
+    //スカイボックスのマテリアル
+    private Material skyboxMaterial;
+
     //マップの配列
     //1がステージブロック
     //2がゴール
@@ -63,6 +69,9 @@ public class SecondStageGameManager : MonoBehaviour
 
         //ステージ2に来たらフラグを変更
         isStage = true;
+
+        //Lighting Settingsで指定したスカイボックスのマテリアルを取得
+        skyboxMaterial = RenderSettings.skybox;
 
         //ここでブロックの生成をする
         for (int y = 0; y < map.GetLength(0); y++)
@@ -114,7 +123,8 @@ public class SecondStageGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+        //スカイボックスマテリアルのRotationを操作して角度を変化させる
+        skyboxMaterial.SetFloat("_Rotation", Mathf.Repeat(skyboxMaterial.GetFloat("_Rotation") + rotateSpeed * Time.deltaTime, 360f));
     }
 
     IEnumerator FadeIn()

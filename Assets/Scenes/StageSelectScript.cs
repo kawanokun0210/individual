@@ -15,6 +15,12 @@ public class StageSelectScript : MonoBehaviour
     public AudioSource bgm;
     public AudioSource se;
 
+    //回転スピード
+    [SerializeField]
+    private float rotateSpeed = 0.5f;
+    //スカイボックスのマテリアル
+    private Material skyboxMaterial;
+
     void Start()
     {
         //最初にフェードを解除する
@@ -28,6 +34,9 @@ public class StageSelectScript : MonoBehaviour
 
         //点滅感覚をリセット
         GameStartScript.blinkInterval = 0.6f;
+
+        //Lighting Settingsで指定したスカイボックスのマテリアルを取得
+        skyboxMaterial = RenderSettings.skybox;
 
     }
 
@@ -58,6 +67,9 @@ public class StageSelectScript : MonoBehaviour
             StageSelectPlayer.isInput = false;
             StartCoroutine(FadeOutAndLoadScene("SecondStageScene"));
         }
+
+        //スカイボックスマテリアルのRotationを操作して角度を変化させる
+        skyboxMaterial.SetFloat("_Rotation", Mathf.Repeat(skyboxMaterial.GetFloat("_Rotation") + rotateSpeed * Time.deltaTime, 360f));
 
     }
 

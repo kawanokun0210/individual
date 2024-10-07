@@ -31,6 +31,12 @@ public class ClearScript : MonoBehaviour
     public static bool firstStageClear = false;
     public static bool secondStageClear = false;
 
+    //回転スピード
+    [SerializeField]
+    private float rotateSpeed = 0.5f;
+    //スカイボックスのマテリアル
+    private Material skyboxMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +55,9 @@ public class ClearScript : MonoBehaviour
             secondStageClear = true;
         }
 
+        //Lighting Settingsで指定したスカイボックスのマテリアルを取得
+        skyboxMaterial = RenderSettings.skybox;
+
     }
 
     // Update is called once per frame
@@ -63,6 +72,9 @@ public class ClearScript : MonoBehaviour
 
         //縦の入力待ち
         float verticalInput = Input.GetAxis("Vertical");
+
+        //スカイボックスマテリアルのRotationを操作して角度を変化させる
+        skyboxMaterial.SetFloat("_Rotation", Mathf.Repeat(skyboxMaterial.GetFloat("_Rotation") + rotateSpeed * Time.deltaTime, 360f));
 
         //上下入力した際の処理の関数
         SelectInputUp(verticalInput);
