@@ -185,7 +185,7 @@ public class playerScript : MonoBehaviour
             animator.SetBool("fall", false);
 
             //アニメーションを変更。
-            animator.SetBool("landing", true);
+            //animator.SetBool("landing", true);
 
             //攻撃アニメーションの状態を監視
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);

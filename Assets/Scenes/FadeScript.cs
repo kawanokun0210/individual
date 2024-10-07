@@ -15,10 +15,18 @@ public class FadeScript : MonoBehaviour
     public AudioSource bgm;
     public AudioSource se;
 
+    //回転スピード
+    [SerializeField]
+    private float rotateSpeed = 0.5f;
+    //スカイボックスのマテリアル
+    private Material skyboxMaterial;
+
     void Start()
     {
         //最初にフェードを解除する
         StartCoroutine(FadeIn());
+        //Lighting Settingsで指定したスカイボックスのマテリアルを取得
+        skyboxMaterial = RenderSettings.skybox;
     }
 
     void Update()
@@ -35,6 +43,10 @@ public class FadeScript : MonoBehaviour
             GameStartScript.blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
         }
+
+        //　スカイボックスマテリアルのRotationを操作して角度を変化させる
+        skyboxMaterial.SetFloat("_Rotation", Mathf.Repeat(skyboxMaterial.GetFloat("_Rotation") + rotateSpeed * Time.deltaTime, 360f));
+
     }
 
     IEnumerator FadeIn()
