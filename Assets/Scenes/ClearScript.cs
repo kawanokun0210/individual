@@ -37,6 +37,9 @@ public class ClearScript : MonoBehaviour
     //スカイボックスのマテリアル
     private Material skyboxMaterial;
 
+    //Audioの宣言
+    public AudioSource dicisionSE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -130,12 +133,14 @@ public class ClearScript : MonoBehaviour
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("TitleScene"));
+            dicisionSE.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isFading && stageSelect || Input.GetButtonDown("Fire1") && !isFading && stageSelect)
         {
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
+            dicisionSE.Play();
         }
     }
 

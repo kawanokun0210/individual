@@ -38,6 +38,9 @@ public class OverScript : MonoBehaviour
     //スカイボックスのマテリアル
     private Material skyboxMaterial;
 
+    //Audioの宣言
+    public AudioSource dicisionSE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -166,6 +169,7 @@ public class OverScript : MonoBehaviour
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("TitleScene"));
+            dicisionSE.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isFading && reStart || Input.GetButtonDown("Fire1") && !isFading && reStart)
         {
@@ -174,12 +178,14 @@ public class OverScript : MonoBehaviour
                 isInput = false;
                 blinkInterval = 0.1f;
                 StartCoroutine(FadeOutAndLoadScene("SampleScene"));
+                dicisionSE.Play();
             }
             else if (SecondStageGameManager.isStage)
             {
                 isInput = false;
                 blinkInterval = 0.1f;
                 StartCoroutine(FadeOutAndLoadScene("SecondStageScene"));
+                dicisionSE.Play();
             }
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isFading && stageSelect || Input.GetButtonDown("Fire1") && !isFading && stageSelect)
@@ -187,6 +193,7 @@ public class OverScript : MonoBehaviour
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
+            dicisionSE.Play();
         }
     }
 
