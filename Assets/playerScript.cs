@@ -47,6 +47,7 @@ public class playerScript : MonoBehaviour
     //Audio系の宣言
     public AudioSource healSE;
     public AudioSource swingSwordSE;
+    public AudioSource jumpSE;
 
     // Start is called before the first frame update
     void Start()
@@ -113,6 +114,19 @@ public class playerScript : MonoBehaviour
             animator.SetBool("fall", false);
             animator.SetBool("jumpping", false);
             animator.SetBool("jump", false);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Block")
+        {
+            //ジャンプができる状態にする
+            isJump = false;
+
+            //アニメーションを変更。
+            animator.SetBool("fall", false);
+
         }
     }
 
@@ -292,22 +306,20 @@ public class playerScript : MonoBehaviour
             animator.SetBool("jump", true);
             //アニメーションを変更。
             animator.SetBool("attack", false);
+            //ジャンプのSEを流す
+            jumpSE.Play();
         }
 
-        //Debug.Log(isJump + "," + rb.velocity.y);
-       
         if (isJump && rb.velocity.y > 0)
         {
             //アニメーションを変更。
             animator.SetBool("jumpping", true);
-            //Debug.Log(animator.GetBool("jumpping"));
         }
         
         if (isJump && rb.velocity.y < 0)
         {
             //アニメーションを変更。
             animator.SetBool("fall", true);
-            //Debug.Log(animator.GetBool("fall"));
         }
 
     }
