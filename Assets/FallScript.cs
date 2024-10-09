@@ -13,6 +13,9 @@ public class FallScript : MonoBehaviour
     public float fadeDuration = 20.0f;//フェードアウトの時間
     private bool isFading = false;
 
+    //Audio用の宣言
+    public AudioSource stageBGM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +33,12 @@ public class FallScript : MonoBehaviour
         var playerPosition = playerController.transform.position;
         transform.position = playerPosition;
 
+        //もしプレイヤーが一定の位置まで落ちたら
         if(playerController != null && playerController.isFall)
         {
+            //ステージのBGMを止める
+            stageBGM.Stop();
+            //ゲームオーバー画面に行く
             StartCoroutine(FadeOutAndLoadScene("OverScene"));
         }
 

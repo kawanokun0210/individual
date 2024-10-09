@@ -13,6 +13,9 @@ public class GoalScript : MonoBehaviour
     public float fadeDuration = 20.0f;//フェードアウトの時間
     private bool isFading = false;
 
+    //Audio用の宣言
+    public AudioSource stageBGM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,8 @@ public class GoalScript : MonoBehaviour
         //もしプレイヤーがゴールしたら
         if (playerController != null && playerController.isGoal)
         {
+            //ステージのBGMを止める
+            stageBGM.Stop();
             //クリアシーンに移動
             StartCoroutine(FadeOutAndLoadScene("ClearScene"));
         }
