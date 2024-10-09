@@ -39,7 +39,9 @@ public class OverScript : MonoBehaviour
     private Material skyboxMaterial;
 
     //Audio�̐錾
+    public AudioSource overBGM;
     public AudioSource dicisionSE;
+    public AudioSource cursorSE;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +88,7 @@ public class OverScript : MonoBehaviour
             reStart = false;
             stageSelect = false;
             coolTime = 0;
+            cursorSE.Play();
         }
         else if (verticalInput > 0 && backTitle && coolTime >= 30 && isInput || Input.GetKey(KeyCode.W) && backTitle && coolTime >= 30 && isInput)
         {
@@ -93,6 +96,7 @@ public class OverScript : MonoBehaviour
             backTitle = false;
             reStart = false;
             coolTime = 0;
+            cursorSE.Play();
         }
         else if (verticalInput > 0 && stageSelect && coolTime >= 30 && isInput || Input.GetKey(KeyCode.W) && stageSelect && coolTime >= 30 && isInput)
         {
@@ -100,6 +104,7 @@ public class OverScript : MonoBehaviour
             stageSelect = false;
             backTitle = false;
             coolTime = 0;
+            cursorSE.Play();
         }
     } 
 
@@ -112,6 +117,7 @@ public class OverScript : MonoBehaviour
             reStart = false;
             stageSelect = true;
             coolTime = 0;
+            cursorSE.Play();
         }
         else if (verticalInput < 0 && backTitle && coolTime >= 30 && isInput || Input.GetKeyDown(KeyCode.S) && backTitle && coolTime >= 30 && isInput)
         {
@@ -119,6 +125,7 @@ public class OverScript : MonoBehaviour
             backTitle = false;
             reStart = true;
             coolTime = 0;
+            cursorSE.Play();
         }
         else if (verticalInput < 0 && stageSelect && coolTime >= 30 && isInput || Input.GetKeyDown(KeyCode.S) && stageSelect && coolTime >= 30 && isInput)
         {
@@ -126,6 +133,7 @@ public class OverScript : MonoBehaviour
             stageSelect = false;
             backTitle = true;
             coolTime = 0;
+            cursorSE.Play();
         }
     }
 
@@ -169,6 +177,7 @@ public class OverScript : MonoBehaviour
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("TitleScene"));
+            overBGM.Stop();
             dicisionSE.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isFading && reStart || Input.GetButtonDown("Fire1") && !isFading && reStart)
@@ -178,6 +187,7 @@ public class OverScript : MonoBehaviour
                 isInput = false;
                 blinkInterval = 0.1f;
                 StartCoroutine(FadeOutAndLoadScene("SampleScene"));
+                overBGM.Stop();
                 dicisionSE.Play();
             }
             else if (SecondStageGameManager.isStage)
@@ -185,6 +195,7 @@ public class OverScript : MonoBehaviour
                 isInput = false;
                 blinkInterval = 0.1f;
                 StartCoroutine(FadeOutAndLoadScene("SecondStageScene"));
+                overBGM.Stop();
                 dicisionSE.Play();
             }
         }
@@ -193,6 +204,7 @@ public class OverScript : MonoBehaviour
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
+            overBGM.Stop();
             dicisionSE.Play();
         }
     }

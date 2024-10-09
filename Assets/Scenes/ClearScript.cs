@@ -38,7 +38,9 @@ public class ClearScript : MonoBehaviour
     private Material skyboxMaterial;
 
     //Audio�̐錾
+    public AudioSource clearBGM;
     public AudioSource dicisionSE;
+    public AudioSource cursorSE;
 
     // Start is called before the first frame update
     void Start()
@@ -99,12 +101,14 @@ public class ClearScript : MonoBehaviour
             stageSelect = true;
             backTitle = false;
             coolTime = 0;
+            cursorSE.Play();
         }
         else if (verticalInput > 0 && stageSelect && coolTime >= 30 && isInput || Input.GetKey(KeyCode.W) && stageSelect && coolTime >= 30 && isInput)
         {
             stageSelect = false;
             backTitle = true;
             coolTime = 0;
+            cursorSE.Play();
         }
     }
 
@@ -116,12 +120,14 @@ public class ClearScript : MonoBehaviour
             stageSelect = true;
             backTitle = false;
             coolTime = 0;
+            cursorSE.Play();
         }
         else if (verticalInput < 0 && stageSelect && coolTime >= 30 && isInput || Input.GetKeyDown(KeyCode.S) && stageSelect && coolTime >= 30 && isInput)
         {
             stageSelect = false;
             backTitle = true;
             coolTime = 0;
+            cursorSE.Play();
         }
     }
 
@@ -133,6 +139,7 @@ public class ClearScript : MonoBehaviour
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("TitleScene"));
+            clearBGM.Stop();
             dicisionSE.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isFading && stageSelect || Input.GetButtonDown("Fire1") && !isFading && stageSelect)
@@ -140,6 +147,7 @@ public class ClearScript : MonoBehaviour
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
+            clearBGM.Stop();
             dicisionSE.Play();
         }
     }
