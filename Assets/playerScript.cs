@@ -46,6 +46,7 @@ public class playerScript : MonoBehaviour
 
     //Audio系の宣言
     public AudioSource healSE;
+    public AudioSource swingSwordSE;
 
     // Start is called before the first frame update
     void Start()
@@ -314,16 +315,18 @@ public class playerScript : MonoBehaviour
     //攻撃の関数
     void Attack()
     {
+        //攻撃アニメーションの状態を監視
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
         //エンターもしくはBボタンを押したら攻撃
         if (Input.GetKeyDown(KeyCode.Return) && !isJump && !isAttack && !isD && !isA || Input.GetButtonDown("Fire2") && !isJump && !isAttack && !isD && !isA)
         {
             //アニメーションを変更。
             animator.SetBool("attack", true);
             isAttack = true;
+            //1秒後にSEを再生するコルーチンを開始
+            StartCoroutine(PlaySwingSound(0.4f));
         }
-
-        //攻撃アニメーションの状態を監視
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         //Attackがアニメーションのステート名と一致する場合
         if (isAttack && stateInfo.IsName("Attack") && stateInfo.normalizedTime >= 1.0f)
@@ -331,6 +334,16 @@ public class playerScript : MonoBehaviour
             animator.SetBool("attack", false);
             isAttack = false;
         }
+    }
+
+    //1秒後にSEを再生するコルーチン
+    private IEnumerator PlaySwingSound(float delay)
+    {
+        //指定された秒数再生を待つ
+        yield return new WaitForSeconds(delay);
+
+        swingSwordSE.Play();
+
     }
 
     //待機アニメーション用の処理
