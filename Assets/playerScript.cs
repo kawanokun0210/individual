@@ -237,8 +237,8 @@ public class playerScript : MonoBehaviour
             isAttack = false;
             //現在地に上で取得をした値を足して移動する。
             transform.position += movedir;
-            //進む方向に滑らかに向く。
-            transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotateSpeed);
+            //プレイヤーの向きを変更
+            transform.rotation = Quaternion.Euler(0, 90, 0);
             //アニメーションを変更。
             animator.SetBool("mode", true);
             //アニメーションを変更。
@@ -259,8 +259,8 @@ public class playerScript : MonoBehaviour
             isAttack = false;
             //現在地に上で取得をした値を足して移動する。
             transform.position += movedir;
-            //進む方向に滑らかに向く。
-            transform.forward = Vector3.Slerp(transform.forward, movedir, Time.deltaTime * rotateSpeed);
+            //プレイヤーの向きを変更
+            transform.rotation = Quaternion.Euler(0, -90, 0);
             //アニメーションを変更。
             animator.SetBool("mode", true);
             //アニメーションを変更。

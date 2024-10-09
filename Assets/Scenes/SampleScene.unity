@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0026807657, g: 0.2872985, b: 0.3050503, a: 1}
+  m_IndirectSpecularColor: {r: 0.002610293, g: 0.2871556, b: 0.30490682, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,6 +176,7 @@ MonoBehaviour:
   heel: {fileID: 1700748213855772, guid: 4c156eaa475a7c44aa3c826450245d6a, type: 3}
   fadeImage: {fileID: 969855542}
   fadeDuration: 1
+  rotateSpeed: 0.5
 --- !u!4 &414076049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400186, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
