@@ -167,13 +167,16 @@ public class playerScript : MonoBehaviour
         Vector3 rayPosition = transform.position + new Vector3(0, 0.5f, 0);
         Ray ray = new Ray(rayPosition, Vector3.down);
 
-        Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
+        //レイを可視化する
+        //Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
 
+        //レイが地面と当たっているかを判断する
         isBlock = Physics.Raycast(ray, rayDistance);
 
         if (isBlock)
         {
-            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
+            //赤色のレイを表示する
+            //Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
 
             //重力無効
             rb.isKinematic = false;
@@ -192,7 +195,8 @@ public class playerScript : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.blue);
+            //青色の例を表示する
+            //Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.blue);
 
             //ブロックにあたっていないことにする
             isHitBlock = false;
