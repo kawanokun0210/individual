@@ -49,6 +49,9 @@ public class playerScript : MonoBehaviour
     public AudioSource swingSwordSE;
     public AudioSource jumpSE;
 
+    //ポーズ画面用
+    public static bool isPose = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,38 +78,51 @@ public class playerScript : MonoBehaviour
         //移動ベクトルを設定
         move = new Vector3(horizontalInput, 0, 0);
 
-        //移動処理
-        Move(movedir, horizontalInput);
+        if (!isPose)
+        {
+            //画面を動かす
+            Time.timeScale = 1.0f;
 
-        //ジャンプの処理
-        Jump();
+            //移動処理
+            Move(movedir, horizontalInput);
 
-        //攻撃関数
-        Attack();
+            //ジャンプの処理
+            Jump();
 
-        //ハートのポジション関数
-        UpdateHeartPositions(offset);
+            //攻撃関数
+            Attack();
 
-        //待機アニメーション関数
-        StartIdleAnimation();
+            //ハートのポジション関数
+            UpdateHeartPositions(offset);
 
-        //敵と当たった時のダメージ処理
-        ApplyDamageFromEnemy();
+            //待機アニメーション関数
+            StartIdleAnimation();
 
-        //回復の関数
-        HeelAction();
+            //敵と当たった時のダメージ処理
+            ApplyDamageFromEnemy();
 
-        //落下の関数
-        Fall();
+            //回復の関数
+            HeelAction();
 
-        //レイによる当たり判定
-        RayHit();
+            //落下の関数
+            Fall();
+
+            //レイによる当たり判定
+            RayHit();
+
+            if (Input.GetKeyDown(KeyCode.JoystickButton2) && !isPose || Input.GetKeyDown(KeyCode.Escape) && !isPose)
+            {
+                //ポーズ画面を開く
+                isPose = true;
+            }
+
+        }
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Block")
+        if (collision.gameObject.tag == "Block")
         {
             //ジャンプができる状態にする
             isJump = false;
@@ -315,7 +331,7 @@ public class playerScript : MonoBehaviour
             //アニメーションを変更。
             animator.SetBool("jumpping", true);
         }
-        
+
         if (isJump && rb.velocity.y < 0)
         {
             //アニメーションを変更。
