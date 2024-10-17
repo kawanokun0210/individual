@@ -114,6 +114,15 @@ public class StageSelectGameObject : MonoBehaviour
         //ステージ２
         SecondStageGameManager.isStage = false;
 
+        //ポーズ画面を開かないようにする
+        playerScript.isPose = false;
+
+        //ポーズ画面に関することのリセット
+        PoseScript.isInput = true;
+        PoseScript.blinkInterval = 0.6f;
+        PoseScript.stageSelect = true;
+        PoseScript.backTitle = false;
+
         //ゲームクリアで使うもの
         ClearScript.isInput = true;
         ClearScript.blinkInterval = 0.6f;

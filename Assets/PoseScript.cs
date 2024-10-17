@@ -240,11 +240,14 @@ public class PoseScript : MonoBehaviour
         float timer = 0;
         isFading = true;
 
+        // フェードアウト開始時のアルファ値を保存
+        float startAlpha = fadeImage.color.a;
+
         //フェードアウト(アルファ値を0から1にする）
         while (timer < fadeDuration)
         {
             timer += Time.deltaTime;
-            float alpha = timer / fadeDuration;
+            float alpha = Mathf.Lerp(startAlpha, 1, timer / fadeDuration);
             SetAlpha(alpha);
             yield return null;
         }
