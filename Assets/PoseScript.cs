@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ public class PoseScript : MonoBehaviour
     public static bool stageSelect = true;
     public static bool backTitle = false;
     public static bool isInput = true;
+    private bool isOrderChanged = false;
     int coolTime = 0;
 
     //Audioの宣言
@@ -41,45 +43,78 @@ public class PoseScript : MonoBehaviour
         {
             playerController = player.GetComponent<playerScript>();
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //常にプレイヤーと同じポジションに移動
         var playerPosition = playerController.transform.position;
         transform.position = playerPosition;
         stageSelectText.transform.position = playerPosition + new Vector3(546.6f, 251.3f, 0);
         backTitleText.transform.position = playerPosition + new Vector3(506.6f, 201.3f, 0);
 
+        //縦の入力待ち
+        float verticalInput = Input.GetAxis("Vertical");
+
         if (playerScript.isPose)
         {
+
+            //再入力までのクールタイム
+            if (coolTime <= 120)
+            {
+                coolTime++;
+            }
+
             //ポーズ画面が開かれたとき用
             OpenPose();
 
+            //上下入力した際の処理の関数
+            SelectInputUp(verticalInput);
+            SelectInputDown(verticalInput);
 
+            //文字の点滅をさせる関数
+            Blinking();
+
+            //決定した際にシーンを変更する関数
+            SceneChange();
 
         }
+        else
+        {
+            //ポーズ画面を閉じた時
+            ClosePose();
+        }
+
+    }
+
+    void ClosePose()
+    {
+        //文字を非表示 
+        fadeImage.enabled = false;
+        backTitleText.enabled = false;
+        stageSelectText.enabled = false;
+
+        //ポーズ画面からプレイ画面へ
+        playerScript.isPose = false;
 
     }
 
     void OpenPose()
     {
         //ポーズ画面を開く
-        Color imageColor = fadeImage.color;
-        imageColor.a = 0.9f;
-        fadeImage.color = imageColor;
+        fadeImage.enabled = true;
 
-        //文字を表示 
-        Color selectText = stageSelectText.color;
-        selectText.a = 1.0f;
-        stageSelectText.color = selectText;
+        //表示順を変更
+        if (!isOrderChanged)
+        {
+            fadeImage.transform.SetAsFirstSibling();
+            backTitleText.transform.SetAsLastSibling();
+            stageSelectText.transform.SetAsLastSibling();
+            isOrderChanged = true;
+        }
 
-        Color titleText = backTitleText.color;
-        titleText.a = 1.0f;
-        backTitleText.color = titleText;
-
-        //ゲーム画面を固める
-        Time.timeScale = 0.0f;
     }
 
     void Blinking()
@@ -107,6 +142,14 @@ public class PoseScript : MonoBehaviour
         //スペースを押したらシーンを変更する
         if (Input.GetKeyDown(KeyCode.Space) && !isFading && backTitle || Input.GetButtonDown("Fire1") && !isFading && backTitle)
         {
+            //表示順を変更
+            if (isOrderChanged)
+            {
+                fadeImage.transform.SetAsLastSibling();
+                backTitleText.transform.SetAsFirstSibling();
+                stageSelectText.transform.SetAsFirstSibling();
+            }
+
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("TitleScene"));
@@ -114,6 +157,14 @@ public class PoseScript : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isFading && stageSelect || Input.GetButtonDown("Fire1") && !isFading && stageSelect)
         {
+            //表示順を変更
+            if (isOrderChanged)
+            {
+                fadeImage.transform.SetAsLastSibling();
+                backTitleText.transform.SetAsFirstSibling();
+                stageSelectText.transform.SetAsFirstSibling();
+            }
+
             isInput = false;
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
