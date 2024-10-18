@@ -31,6 +31,7 @@ public class PoseScript : MonoBehaviour
     int coolTime = 0;
 
     //Audioの宣言
+    public AudioSource stageBGM;
     public AudioSource dicisionSE;
     public AudioSource cursorSE;
 
@@ -52,8 +53,8 @@ public class PoseScript : MonoBehaviour
         //常にプレイヤーと同じポジションに移動
         var playerPosition = playerController.transform.position;
         transform.position = playerPosition;
-        stageSelectText.transform.position = playerPosition + new Vector3(546.6f, 251.3f, 0);
-        backTitleText.transform.position = playerPosition + new Vector3(506.6f, 201.3f, 0);
+        stageSelectText.transform.position = playerPosition + new Vector3(666.6f, 331.3f, 0);
+        backTitleText.transform.position = playerPosition + new Vector3(626.6f, 271.3f, 0);
 
         //縦の入力待ち
         float verticalInput = Input.GetAxis("Vertical");
@@ -154,6 +155,7 @@ public class PoseScript : MonoBehaviour
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("TitleScene"));
             dicisionSE.Play();
+            stageBGM.Stop();
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isFading && stageSelect || Input.GetButtonDown("Fire1") && !isFading && stageSelect)
         {
@@ -169,6 +171,7 @@ public class PoseScript : MonoBehaviour
             blinkInterval = 0.1f;
             StartCoroutine(FadeOutAndLoadScene("StageSelectScene"));
             dicisionSE.Play();
+            stageBGM.Stop();
         }
     }
 
