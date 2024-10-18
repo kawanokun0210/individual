@@ -52,6 +52,8 @@ public class playerScript : MonoBehaviour
     //ポーズ画面用
     public static bool isPose = false;
 
+    int backCoolTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,8 +82,11 @@ public class playerScript : MonoBehaviour
 
         if (!isPose)
         {
-            //画面を動かす
-            Time.timeScale = 1.0f;
+            //プレイ画面に戻れるようになるまでのクールタイム
+            if (backCoolTime != 60)
+            {
+                backCoolTime++;
+            }
 
             //移動処理
             Move(movedir, horizontalInput);
@@ -110,10 +115,11 @@ public class playerScript : MonoBehaviour
             //レイによる当たり判定
             RayHit();
 
-            if (Input.GetKeyDown(KeyCode.JoystickButton2) && !isPose || Input.GetKeyDown(KeyCode.Escape) && !isPose)
+            if (Input.GetKeyDown(KeyCode.JoystickButton2) && !isPose && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && !isPose && backCoolTime == 60)
             {
                 //ポーズ画面を開く
                 isPose = true;
+                backCoolTime = 0;
             }
 
         }

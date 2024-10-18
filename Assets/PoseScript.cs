@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 
@@ -29,6 +30,7 @@ public class PoseScript : MonoBehaviour
     public static bool isInput = true;
     private bool isOrderChanged = false;
     int coolTime = 0;
+    int backCoolTime = 0;
 
     //Audioの宣言
     public AudioSource stageBGM;
@@ -59,6 +61,7 @@ public class PoseScript : MonoBehaviour
         //縦の入力待ち
         float verticalInput = Input.GetAxis("Vertical");
 
+        //ポーズ画面が開いていたら
         if (playerScript.isPose)
         {
 
@@ -66,6 +69,12 @@ public class PoseScript : MonoBehaviour
             if (coolTime <= 120)
             {
                 coolTime++;
+            }
+
+            //プレイ画面に戻れるようになるまでのクールタイム
+            if(backCoolTime != 60)
+            {
+                backCoolTime++;
             }
 
             //ポーズ画面が開かれたとき用
@@ -80,6 +89,13 @@ public class PoseScript : MonoBehaviour
 
             //決定した際にシーンを変更する関数
             SceneChange();
+
+            if (Input.GetKeyDown(KeyCode.JoystickButton2) && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && backCoolTime == 60)
+            {
+                //ポーズ画面を閉じる
+                playerScript.isPose = false;
+                backCoolTime = 0;
+            }
 
         }
         else
@@ -96,10 +112,6 @@ public class PoseScript : MonoBehaviour
         fadeImage.enabled = false;
         backTitleText.enabled = false;
         stageSelectText.enabled = false;
-
-        //ポーズ画面からプレイ画面へ
-        playerScript.isPose = false;
-
     }
 
     void OpenPose()
