@@ -29,6 +29,7 @@ public class PoseScript : MonoBehaviour
     public static bool backTitle = false;
     public static bool isInput = true;
     private bool isOrderChanged = false;
+    public bool isBlinking = false;
     int coolTime = 0;
     int backCoolTime = 0;
 
@@ -94,6 +95,7 @@ public class PoseScript : MonoBehaviour
             {
                 //ポーズ画面を閉じる
                 playerScript.isPose = false;
+                isBlinking = false;
                 backCoolTime = 0;
             }
 
@@ -112,12 +114,19 @@ public class PoseScript : MonoBehaviour
         fadeImage.enabled = false;
         backTitleText.enabled = false;
         stageSelectText.enabled = false;
+
+        //点滅を開始する
+        isBlinking = false;
+
     }
 
     void OpenPose()
     {
         //ポーズ画面を開く
         fadeImage.enabled = true;
+
+        //点滅を開始する
+        isBlinking = true;
 
         //表示順を変更
         if (!isOrderChanged)
@@ -238,7 +247,7 @@ public class PoseScript : MonoBehaviour
 
     private IEnumerator BlinkText(TextMeshProUGUI textMeshPro)
     {
-        while (true)
+        while (isBlinking)
         {
             //テキストを非表示にする
             textMeshPro.enabled = false;
