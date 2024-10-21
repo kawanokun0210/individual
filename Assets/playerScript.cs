@@ -282,11 +282,11 @@ public class playerScript : MonoBehaviour
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
             //Attackがアニメーションのステート名と一致する場合
-            Debug.Log(stateInfo.IsName("landing") + "," + stateInfo.normalizedTime);
+            //Debug.Log(stateInfo.IsName("landing") + "," + stateInfo.normalizedTime);
             if (stateInfo.IsName("landing") && stateInfo.normalizedTime >= 0.5f)
             {
                 animator.SetBool("landing", false);
-                Debug.Log(animator.GetBool("landing"));
+                //Debug.Log(animator.GetBool("landing"));
             }
 
         }

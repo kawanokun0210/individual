@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PipeScript : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class PipeScript : MonoBehaviour
     private float moveTime = 0;//Œo‰ßŽžŠÔ
 
     private BoxCollider boxCollider;//BoxCollider‚ÌŽQÆ
+    public static bool isSceneChange = false;
 
     private void Start()
     {
@@ -50,7 +53,9 @@ public class PipeScript : MonoBehaviour
             if (t >= 1.0f)
             {
                 isMoving = false;
+                isSceneChange = true;
             }
         }
     }
+
 }
