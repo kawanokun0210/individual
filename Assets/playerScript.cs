@@ -137,6 +137,17 @@ public class playerScript : MonoBehaviour
             animator.SetBool("jumpping", false);
             animator.SetBool("jump", false);
         }
+
+        if (collision.gameObject.tag == "Pipe")
+        {
+            //ジャンプができる状態にする
+            isJump = false;
+
+            animator.SetBool("fall", false);
+            animator.SetBool("jumpping", false);
+            animator.SetBool("jump", false);
+        }
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -150,6 +161,17 @@ public class playerScript : MonoBehaviour
             animator.SetBool("fall", false);
 
         }
+
+        if (collision.gameObject.tag == "Pipe")
+        {
+            //ジャンプができる状態にする
+            isJump = false;
+
+            //アニメーションを変更。
+            animator.SetBool("fall", false);
+
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
