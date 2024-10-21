@@ -126,13 +126,6 @@ public class playerScript : MonoBehaviour
                 backCoolTime = 0;
             }
 
-            if (isHitPipe && PipeScript.isMoving)
-            {
-                //èdóÕñ≥å¯
-                rb.isKinematic = false;
-                rb.useGravity = false;
-            }
-
         }
 
     }

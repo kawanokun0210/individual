@@ -18,12 +18,10 @@ public class SecondStageGameManager : MonoBehaviour
     public GameObject cactus;//サボテンの敵
     public GameObject gost;
     public GameObject moveBlock;
-    public GameObject pipe;
- 
+   
     Vector3 position = Vector3.zero;
     Vector3 enemyPosition = Vector3.zero;
-    Vector3 pipePosition = Vector3.zero;
-
+  
     //ゲームオーバー用
     public static bool isStage = false;
 
@@ -56,7 +54,7 @@ public class SecondStageGameManager : MonoBehaviour
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
-        {0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,5,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,5,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,5,0,0,0,2 },
+        {0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,5,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,5,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,5,0,0,0,2 },
         {1,1,1,1,1,1,1,1,7,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,2 },
     };
 
@@ -86,10 +84,6 @@ public class SecondStageGameManager : MonoBehaviour
             {
                 position.y = -y + 5;
                 position.x = x - 5;
-
-                pipePosition.y = -y + 5.5f;
-                pipePosition.x = x - 5;
-                pipePosition.z = 0.22f;
 
                 enemyPosition.y = -y + 4.5f;
                 enemyPosition.x = x - 5;
@@ -131,11 +125,6 @@ public class SecondStageGameManager : MonoBehaviour
                 {
                     Instantiate(moveBlock, position, Quaternion.identity);
                 }
-                //ステージブロック生成
-                if (map[y, x] == 8)
-                {
-                    Instantiate(pipe, pipePosition, Quaternion.identity);
-                }
             }
         }
     }
@@ -145,13 +134,6 @@ public class SecondStageGameManager : MonoBehaviour
     {
         //スカイボックスマテリアルのRotationを操作して角度を変化させる
         skyboxMaterial.SetFloat("_Rotation", Mathf.Repeat(skyboxMaterial.GetFloat("_Rotation") + rotateSpeed * Time.deltaTime, 360f));
-
-        //土管に入った時にシーンを変える
-        if(!PipeScript.isMoving && PipeScript.isSceneChange)
-        {
-            StartCoroutine(FadeOutAndLoadScene("SecondStageSceneNo2"));
-        }
-
     }
 
     IEnumerator FadeIn()
