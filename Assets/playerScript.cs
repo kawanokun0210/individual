@@ -54,6 +54,10 @@ public class playerScript : MonoBehaviour
 
     int backCoolTime = 0;
 
+    //土管との判定
+    public static bool isHitPipe = false;
+    public static bool isPushPipe = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -122,6 +126,13 @@ public class playerScript : MonoBehaviour
                 backCoolTime = 0;
             }
 
+            if (isHitPipe && PipeScript.isMoving)
+            {
+                //重力無効
+                rb.isKinematic = false;
+                rb.useGravity = false;
+            }
+
         }
 
     }
@@ -138,14 +149,26 @@ public class playerScript : MonoBehaviour
             animator.SetBool("jump", false);
         }
 
-        if (collision.gameObject.tag == "Pipe")
+        // すべての衝突接触点を取得
+        foreach (ContactPoint contact in collision.contacts)
         {
-            //ジャンプができる状態にする
-            isJump = false;
+            // 接触点の法線ベクトルがオブジェクトの上方向に近い場合、上からの衝突と見なす
+            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
+            {
+                if (collision.gameObject.tag == "Pipe")
+                {
+                    //ジャンプができる状態にする
+                    isJump = false;
 
-            animator.SetBool("fall", false);
-            animator.SetBool("jumpping", false);
-            animator.SetBool("jump", false);
+                    animator.SetBool("fall", false);
+                    animator.SetBool("jumpping", false);
+                    animator.SetBool("jump", false);
+
+                    //土管に入れるようにする
+                    isHitPipe = true;
+
+                }
+            }
         }
 
     }
@@ -162,16 +185,31 @@ public class playerScript : MonoBehaviour
 
         }
 
-        if (collision.gameObject.tag == "Pipe")
+        // すべての衝突接触点を取得
+        foreach (ContactPoint contact in collision.contacts)
         {
-            //ジャンプができる状態にする
-            isJump = false;
+            // 接触点の法線ベクトルがオブジェクトの上方向に近い場合、上からの衝突と見なす
+            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
+            {
+                if (collision.gameObject.tag == "Pipe")
+                {
+                    //ジャンプができる状態にする
+                    isJump = false;
 
-            //アニメーションを変更。
-            animator.SetBool("fall", false);
-
+                    //アニメーションを変更。
+                    animator.SetBool("fall", false);
+                }
+            }
         }
 
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Pipe")
+        {
+            isHitPipe = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
