@@ -95,7 +95,7 @@ public class PoseScript : MonoBehaviour
             {
                 //ポーズ画面を閉じる
                 playerScript.isPose = false;
-                isBlinking = false;
+                //isBlinking = false;
                 backCoolTime = 0;
             }
 
@@ -114,6 +114,10 @@ public class PoseScript : MonoBehaviour
         fadeImage.enabled = false;
         backTitleText.enabled = false;
         stageSelectText.enabled = false;
+
+        //リセットする
+        stageSelectCoroutine = null;
+        backTitleCoroutine = null;
 
         //点滅を終了する
         isBlinking = false;
@@ -145,6 +149,7 @@ public class PoseScript : MonoBehaviour
         {
             if (stageSelectCoroutine == null)
             {
+                Debug.Log("点滅するよ");
                 stageSelectCoroutine = StartCoroutine(BlinkText(stageSelectText));
             }
             StopBlinkCoroutine(ref backTitleCoroutine, backTitleText);
@@ -249,6 +254,7 @@ public class PoseScript : MonoBehaviour
     {
         while (isBlinking)
         {
+            Debug.Log("入っているよ");
             //テキストを非表示にする
             textMeshPro.enabled = false;
             yield return new WaitForSeconds(blinkInterval);
