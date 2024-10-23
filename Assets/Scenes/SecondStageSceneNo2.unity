@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1404978469}
-  m_IndirectSpecularColor: {r: 0.0025600689, g: 0.2870869, b: 0.3048045, a: 1}
+  m_IndirectSpecularColor: {r: 0.0026321544, g: 0.28724816, b: 0.3050367, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1256,7 +1256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1008861016}
   fadeDuration: 1
-  stageBGM: {fileID: 0}
+  stageBGM: {fileID: 795194474}
 --- !u!114 &1008861016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,7 +1684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1658793785}
   fadeDuration: 1
-  stageBGM: {fileID: 0}
+  stageBGM: {fileID: 795194474}
 --- !u!114 &1658793785
 MonoBehaviour:
   m_ObjectHideFlags: 0

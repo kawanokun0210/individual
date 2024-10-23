@@ -65,7 +65,7 @@ public class PipeScript : MonoBehaviour
             isMoving = true;
             isX = true;
             moveTime = 0;
-            boxCollider.enabled = !boxCollider.enabled;
+            boxCollider.isTrigger = true;
         }
 
         //移動中の場合、Lerpで移動
@@ -91,6 +91,7 @@ public class PipeScript : MonoBehaviour
         //シーンが完全に切り替わったらスタートさせる
         if (fadeImage.color.a <= 0 && isSceneChange)
         {
+            boxCollider.isTrigger = true;
             if (!isMoving)
             {
                 StartCoroutine(MoveUp());
@@ -120,6 +121,7 @@ public class PipeScript : MonoBehaviour
 
         isMoving = false;
         isSceneChange = false;
+        boxCollider.isTrigger = false;
 
     }
 

@@ -17,6 +17,12 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
 
+       
+
+    }
+
+    private void LateUpdate()
+    {
         //プレイヤー追跡型のスクロール
         //カメラとプレイヤーの位置を取得
         var playerPosition = player.transform.position;
@@ -26,6 +32,6 @@ public class CameraScript : MonoBehaviour
         position.y = playerPosition.y + 2;
         position.z = playerPosition.z - 10;
         transform.position = position;
-
     }
+
 }
