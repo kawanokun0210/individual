@@ -115,7 +115,7 @@ public class PoseScript : MonoBehaviour
         backTitleText.enabled = false;
         stageSelectText.enabled = false;
 
-        //点滅を開始する
+        //点滅を終了する
         isBlinking = false;
 
     }

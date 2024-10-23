@@ -19,6 +19,9 @@ public class PipeScript : MonoBehaviour
     //Rigidbodyを取得
     public Rigidbody rb;
 
+    //アニメーターコントローラー
+    public Animator animator;
+
     //トランジション用
     public Image fadeImage;//フェードアウトするイメージ
     public float fadeDuration = 1.0f;//フェードアウトの時間
@@ -104,7 +107,6 @@ public class PipeScript : MonoBehaviour
 
         isMoving = false;
         isSceneChange = false;
-        boxCollider.enabled = boxCollider.enabled;
 
     }
 

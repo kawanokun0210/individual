@@ -116,9 +116,6 @@ public class playerScript : MonoBehaviour
             //落下の関数
             Fall();
 
-            //レイによる当たり判定
-            RayHit();
-
             if (Input.GetKeyDown(KeyCode.JoystickButton2) && !isPose && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && !isPose && backCoolTime == 60)
             {
                 //ポーズ画面を開く
@@ -128,6 +125,12 @@ public class playerScript : MonoBehaviour
 
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+        //レイによる当たり判定
+        RayHit();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -258,7 +261,7 @@ public class playerScript : MonoBehaviour
         Ray ray = new Ray(rayPosition, Vector3.down);
 
         //レイを可視化する
-        //Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
+        Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
 
         //レイが地面と当たっているかを判断する
         isBlock = Physics.Raycast(ray, rayDistance);
@@ -266,7 +269,7 @@ public class playerScript : MonoBehaviour
         if (isBlock)
         {
             //赤色のレイを表示する
-            //Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
+            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.red);
 
             //重力無効
             rb.isKinematic = false;
@@ -286,7 +289,7 @@ public class playerScript : MonoBehaviour
         else
         {
             //青色の例を表示する
-            //Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.blue);
+            Debug.DrawRay(rayPosition, Vector3.down * rayDistance, Color.blue);
 
             //ブロックにあたっていないことにする
             isHitBlock = false;
