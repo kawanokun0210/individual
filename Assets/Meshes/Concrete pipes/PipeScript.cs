@@ -34,6 +34,10 @@ public class PipeScript : MonoBehaviour
     //ステージ２で使った場合
     public static bool isTableScene = true;
 
+    //Audioの宣言
+    public AudioSource pipeInSE;
+    public AudioSource pipeOutSE;
+
     private void Start()
     {
         //プレイヤーのオブジェクトを探し、そのスクリプトを取得
@@ -70,6 +74,7 @@ public class PipeScript : MonoBehaviour
             playerScript.isInput = false;
             moveTime = 0;
             boxCollider.isTrigger = true;
+            pipeInSE.Play();
         }
 
         //移動中の場合、Lerpで移動
@@ -117,6 +122,8 @@ public class PipeScript : MonoBehaviour
     private IEnumerator MoveUp()
     {
         isMoving = true;
+
+        pipeOutSE.Play();
 
         Vector3 startPosition = playerController.transform.position;
         Vector3 targetPosition = new Vector3(startPosition.x, startPosition.y + moveDistance, startPosition.z);

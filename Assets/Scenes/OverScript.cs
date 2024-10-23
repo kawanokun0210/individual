@@ -52,6 +52,9 @@ public class OverScript : MonoBehaviour
         //Lighting Settingsで指定したスカイボックスのマテリアルを取得
         skyboxMaterial = RenderSettings.skybox;
 
+        //土管のフラグを戻す
+        PipeScript.isTableScene = true;
+
     }
 
     // Update is called once per frame
