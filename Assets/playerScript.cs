@@ -116,12 +116,8 @@ public class playerScript : MonoBehaviour
             //落下の関数
             Fall();
 
-            if (Input.GetKeyDown(KeyCode.JoystickButton2) && !isPose && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && !isPose && backCoolTime == 60)
-            {
-                //ポーズ画面を開く
-                isPose = true;
-                backCoolTime = 0;
-            }
+            //ポーズ画面を開く処理
+            OpenPose();
 
         }
 
@@ -254,6 +250,20 @@ public class playerScript : MonoBehaviour
 
     }
 
+    //ポーズを開く関数
+    void OpenPose()
+    {
+        //特定のキーを押したらポーズ画面を開く
+        if (Input.GetKeyDown(KeyCode.JoystickButton2) && !isPose && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && !isPose && backCoolTime == 60)
+        {
+            //ポーズ画面を開く
+            isPose = true;
+            backCoolTime = 0;
+        }
+
+    }
+
+    //レイとの当たり判定
     void RayHit()
     {
         //プレイヤーの下方向へレイを出す
@@ -278,11 +288,9 @@ public class playerScript : MonoBehaviour
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
             //Attackがアニメーションのステート名と一致する場合
-            //Debug.Log(stateInfo.IsName("landing") + "," + stateInfo.normalizedTime);
             if (stateInfo.IsName("landing") && stateInfo.normalizedTime >= 0.5f)
             {
                 animator.SetBool("landing", false);
-                //Debug.Log(animator.GetBool("landing"));
             }
 
         }

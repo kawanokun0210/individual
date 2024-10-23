@@ -47,6 +47,16 @@ public class PipeScript : MonoBehaviour
 
     void Update()
     {
+        //土管に入る処理
+        PipeIn();
+
+        //土管から出てくる処理
+        PipeOut();
+
+    }
+
+    void PipeIn()
+    {
         //Xキーが押されたとき、移動を開始
         if (Input.GetKeyDown(KeyCode.X) && !isMoving && playerScript.isHitPipe)
         {
@@ -74,7 +84,11 @@ public class PipeScript : MonoBehaviour
                 StartCoroutine(FadeOutAndLoadScene("SecondStageSceneNo2"));
             }
         }
+    }
 
+    void PipeOut()
+    {
+        //シーンが完全に切り替わったらスタートさせる
         if (fadeImage.color.a <= 0 && isSceneChange)
         {
             if (!isMoving)
@@ -82,7 +96,6 @@ public class PipeScript : MonoBehaviour
                 StartCoroutine(MoveUp());
             }
         }
-
     }
 
     private IEnumerator MoveUp()
