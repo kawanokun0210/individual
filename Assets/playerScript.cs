@@ -41,8 +41,12 @@ public class playerScript : MonoBehaviour
     //回復
     bool isHeel = false;
 
+    //レイ用の宣言
     float rayDistance = 0.5f;
     private bool isBlock = true;
+
+    //キー入力の宣言
+    public static bool isInput = true;
 
     //Audio系の宣言
     public AudioSource healSE;
@@ -51,7 +55,6 @@ public class playerScript : MonoBehaviour
 
     //ポーズ画面用
     public static bool isPose = false;
-
     int backCoolTime = 0;
 
     //土管との判定
@@ -66,6 +69,13 @@ public class playerScript : MonoBehaviour
         //ハート用
         hearts = new GameObject[remainingHP];
         CreateHearts();
+
+        //一度土管に入ったら土管のポジションに変更する
+        if(PipeScript.isTableScene && PipeScript.isSceneChange)
+        {
+            transform.position = new Vector3(11, -3.5f, 0);
+        }
+
     }
 
     // Update is called once per frame
@@ -335,7 +345,7 @@ public class playerScript : MonoBehaviour
     void Move(Vector3 movedir, float horizontalInput)
     {
         //Dを押したら右へ移動
-        if (Input.GetKey(KeyCode.D) && !isA || horizontalInput > 0)
+        if (Input.GetKey(KeyCode.D) && !isA && isInput || horizontalInput > 0 && isInput)
         {
             //Dボタンが押されているか
             isD = true;
@@ -357,7 +367,7 @@ public class playerScript : MonoBehaviour
         }
 
         //Aを押したら左へ移動
-        if (Input.GetKey(KeyCode.A) && !isD || horizontalInput < 0)
+        if (Input.GetKey(KeyCode.A) && !isD && isInput || horizontalInput < 0 && isInput)
         {
             //Dボタンが押されているか
             isA = true;
@@ -381,7 +391,7 @@ public class playerScript : MonoBehaviour
     void Jump()
     {
         //スペース押したらジャンプ
-        if (Input.GetKeyDown(KeyCode.Space) && !isJump || Input.GetButtonDown("Fire1") && !isJump)
+        if (Input.GetKeyDown(KeyCode.Space) && !isJump && isInput || Input.GetButtonDown("Fire1") && !isJump && isInput)
         {
             //上にジャンプさせる
             rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
@@ -417,7 +427,7 @@ public class playerScript : MonoBehaviour
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         //エンターもしくはBボタンを押したら攻撃
-        if (Input.GetKeyDown(KeyCode.Return) && !isJump && !isAttack && !isD && !isA || Input.GetButtonDown("Fire2") && !isJump && !isAttack && !isD && !isA)
+        if (Input.GetKeyDown(KeyCode.Return) && !isJump && !isAttack && !isD && !isA && isInput || Input.GetButtonDown("Fire2") && !isJump && !isAttack && !isD && !isA && isInput)
         {
             //アニメーションを変更。
             animator.SetBool("attack", true);

@@ -29,7 +29,10 @@ public class PipeScript : MonoBehaviour
 
     private BoxCollider boxCollider;//BoxColliderの参照
     private bool isX = false;
-    private static bool isSceneChange = false;
+    public static bool isSceneChange = false;
+
+    //ステージ２で使った場合
+    public static bool isTableScene = true;
 
     private void Start()
     {
@@ -64,6 +67,7 @@ public class PipeScript : MonoBehaviour
             targetPosition = transform.position + new Vector3(0, -1, 0);
             isMoving = true;
             isX = true;
+            playerScript.isInput = false;
             moveTime = 0;
             boxCollider.isTrigger = true;
         }
@@ -81,7 +85,18 @@ public class PipeScript : MonoBehaviour
                 isX = false;
                 isMoving = false;
                 isSceneChange = true;
-                StartCoroutine(FadeOutAndLoadScene("SecondStageSceneNo2"));
+
+                //どちらのシーンにいるのかを見る
+                if (isTableScene)
+                {
+                    StartCoroutine(FadeOutAndLoadScene("SecondStageSceneNo2"));
+                    isTableScene = false;
+                }
+                else
+                {
+                    StartCoroutine(FadeOutAndLoadScene("SecondStageScene"));
+                    isTableScene = true;
+                }
             }
         }
     }
@@ -122,6 +137,7 @@ public class PipeScript : MonoBehaviour
         isMoving = false;
         isSceneChange = false;
         boxCollider.isTrigger = false;
+        playerScript.isInput = true;
 
     }
 
