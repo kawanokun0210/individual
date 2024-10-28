@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 780904888}
-  m_IndirectSpecularColor: {r: 0.0025443959, g: 0.28713772, b: 0.30489233, a: 1}
+  m_IndirectSpecularColor: {r: 0.0025008, g: 0.2870761, b: 0.30485693, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1358,7 +1358,7 @@ MonoBehaviour:
   firstStage: {fileID: 3821905195710155297, guid: 07ceabf2cb7a0d143956fcc72cab9eb8, type: 3}
   secondStage: {fileID: 354993687591612960, guid: 679ab75c1c38158459f95024bb941f7c, type: 3}
   block: {fileID: 4804582207598253052, guid: 4c8d65447e86fed4fae4625870a1bf49, type: 3}
-  goal: {fileID: 1964819190900686712, guid: 027674a937b59cc44ba51d74c4e0cc75, type: 3}
+  goal: {fileID: 1000014124467848, guid: df8b2e05e6bc70e4eb740280ce078f7f, type: 3}
   mashroom: {fileID: 875073071404757921, guid: 35f16650380449c78eeac51057eaff2a, type: 3}
   player: {fileID: 146671392}
   heel: {fileID: 1700748213855772, guid: 4c156eaa475a7c44aa3c826450245d6a, type: 3}
