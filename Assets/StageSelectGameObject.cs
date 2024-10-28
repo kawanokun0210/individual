@@ -116,6 +116,8 @@ public class StageSelectGameObject : MonoBehaviour
 
         //ポーズ画面を開かないようにする
         playerScript.isPose = false;
+        //全ての入力を有効にする
+        playerScript.isInput = true;
 
         //ポーズ画面に関することのリセット
         PoseScript.isInput = true;
