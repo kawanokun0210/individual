@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 public class playerScript : MonoBehaviour
 {
@@ -81,18 +82,8 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //水平方向の入力を取得し、それぞれの移動速度をかける。
-        float Xvalue = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        float horizontalInput = Input.GetAxis("Horizontal");
-
-        //現在のX,Zベクトルに上の処理で取得した値を渡す。
-        Vector3 movedir = new Vector3(Xvalue, 0, 0);
-
         // カメラの位置に基づいてハートを更新
         Vector3 offset = new Vector3(-9, 4.5f, 10); // カメラからのオフセット
-
-        //移動ベクトルを設定
-        move = new Vector3(horizontalInput, 0, 0);
 
         if (!isPose)
         {
@@ -101,9 +92,6 @@ public class playerScript : MonoBehaviour
             {
                 backCoolTime++;
             }
-
-            //移動処理
-            Move(movedir, horizontalInput);
 
             //ジャンプの処理
             Jump();
@@ -135,6 +123,22 @@ public class playerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //水平方向の入力を取得し、それぞれの移動速度をかける。
+        float Xvalue = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        float horizontalInput = Input.GetAxis("Horizontal");
+
+        //移動ベクトルを設定
+        move = new Vector3(horizontalInput, 0, 0);
+
+        //現在のX,Zベクトルに上の処理で取得した値を渡す。
+        Vector3 movedir = new Vector3(Xvalue, 0, 0);
+
+        if (!isPose)
+        {
+            //移動処理
+            Move(movedir, horizontalInput);
+
+        }
         //レイによる当たり判定
         RayHit();
     }
