@@ -24,6 +24,10 @@ public class StageSelectPlayer : MonoBehaviour
     //コントローラー入力を受け付けるか
     public static bool isInput = true;
 
+    //移動に制限をかける
+    private float leftLimitPosition = -5.0f;
+    private float rightLimitPosition = 18.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +50,9 @@ public class StageSelectPlayer : MonoBehaviour
 
         //移動関数
         Move(horizontalInput, movedir);
+
+        //移動制限
+        MoveLimit();
 
     }
 
@@ -87,6 +94,27 @@ public class StageSelectPlayer : MonoBehaviour
         {
             isA = false;
         }
+    }
+
+    //移動制限
+    void MoveLimit()
+    {
+        //現在血を常に保存
+        Vector3 playerPosition = transform.position;
+        //左側
+        if(transform.position.x < leftLimitPosition)
+        {
+            playerPosition.x = leftLimitPosition;
+            transform.position = playerPosition;
+        }
+
+        //右側
+        if(transform.position.x > rightLimitPosition)
+        {
+            playerPosition.x = rightLimitPosition;
+            transform.position = playerPosition;
+        }
+
     }
 
     //球体に当たっている時はそのステージに行ける
