@@ -64,8 +64,11 @@ public class PipeScript : MonoBehaviour
 
     void PipeIn()
     {
+        //縦の入力待ち
+        float verticalInput = Input.GetAxis("Vertical");
+
         //Xキーが押されたとき、移動を開始
-        if (Input.GetKeyDown(KeyCode.X) && !isMoving && playerScript.isHitPipe)
+        if (Input.GetKeyDown(KeyCode.X) && !isMoving && playerScript.isHitPipe || verticalInput <= -1 && !isMoving && playerScript.isHitPipe)
         {
             startPosition = playerController.transform.position;
             targetPosition = transform.position + new Vector3(0, -1, 0);
