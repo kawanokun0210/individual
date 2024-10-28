@@ -12,13 +12,12 @@ public class FallBlockScript : MonoBehaviour
     private float timeOnBlock = 0f;
 
     //再度出現させるための宣言
-    private bool isResporn = false;
     private float respornTimer = 0;//リセットまでのカウント
     private float respornTime = 10.0f;//リセットまでの時間
     private Vector3 initialPosition;
     private Vector3 initialScale;
     public float respawnScaleSpeed = 2.0f;//拡大速度
-
+    private BoxCollider boxCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +26,8 @@ public class FallBlockScript : MonoBehaviour
         initialPosition = transform.position;
         //最初のスケールを保存しておく
         initialScale = transform.localScale;
+        //BoxColliderを取得
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -55,7 +56,7 @@ public class FallBlockScript : MonoBehaviour
         }
 
         //指定の時間になったら
-        if(respornTimer >= respornTime)
+        if(respornTimer >= respornTime && isFalling)
         {
             //元の位置に戻す
             transform.position = initialPosition;
@@ -65,6 +66,8 @@ public class FallBlockScript : MonoBehaviour
             respornTimer = 0;
             //落下してないことにする
             isFalling = false;
+            isPlayerOnBlock = false;
+            timeOnBlock = 0;
         }
 
     }
@@ -101,6 +104,7 @@ public class FallBlockScript : MonoBehaviour
     private IEnumerator Respawn()
     {
         transform.localScale = Vector3.zero;
+        boxCollider.enabled = false;
         float elapsedTime = 0f;
 
         while (transform.localScale.x < initialScale.x)
@@ -111,5 +115,6 @@ public class FallBlockScript : MonoBehaviour
         }
 
         transform.localScale = initialScale;//最終的にスケールを正確に戻す
+        boxCollider.enabled = true;
     }
 }
