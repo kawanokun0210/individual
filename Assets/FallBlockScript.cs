@@ -13,7 +13,7 @@ public class FallBlockScript : MonoBehaviour
 
     //再度出現させるための宣言
     private float respornTimer = 0;//リセットまでのカウント
-    private float respornTime = 10.0f;//リセットまでの時間
+    private float respornTime = 7.0f;//リセットまでの時間
     private Vector3 initialPosition;
     private Vector3 initialScale;
     public float respawnScaleSpeed = 2.0f;//拡大速度
