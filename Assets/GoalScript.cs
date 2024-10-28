@@ -38,6 +38,8 @@ public class GoalScript : MonoBehaviour
         {
             //ステージのBGMを止める
             stageBGM.Stop();
+            //全ての入力をキャンセル
+            playerScript.isInput = false;
             //クリアシーンに移動
             StartCoroutine(FadeOutAndLoadScene("ClearScene"));
         }
