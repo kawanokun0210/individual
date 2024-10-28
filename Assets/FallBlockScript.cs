@@ -73,6 +73,16 @@ public class FallBlockScript : MonoBehaviour
     }
 
     //プレイヤーがブロックの上に乗ったら呼ばれる
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayerOnBlock = true;
+            collision.transform.SetParent(transform);
+        }
+    }
+
+    //プレイヤーがブロックの上に乗ったら呼ばれる
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
