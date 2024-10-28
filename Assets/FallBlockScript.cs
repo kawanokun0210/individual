@@ -73,7 +73,7 @@ public class FallBlockScript : MonoBehaviour
     }
 
     //プレイヤーがブロックの上に乗ったら呼ばれる
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
