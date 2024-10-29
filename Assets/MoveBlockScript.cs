@@ -22,8 +22,11 @@ public class MoveBlockScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ˆÚ“®ŠÖ”
-        MoveObject();
+        if (!playerScript.isPose)
+        {
+            //ˆÚ“®ŠÖ”
+            MoveObject();
+        }
     }
 
     private void MoveObject()

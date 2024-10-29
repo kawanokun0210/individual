@@ -22,8 +22,12 @@ public class GostScript : MonoBehaviour
 
     private void Update()
     {
-        //移動関数
-        MoveObject();
+        //ポーズ画面が開いていないとき
+        if (!playerScript.isPose)
+        {
+            //移動関数
+            MoveObject();
+        }
     }
 
     private void MoveObject()

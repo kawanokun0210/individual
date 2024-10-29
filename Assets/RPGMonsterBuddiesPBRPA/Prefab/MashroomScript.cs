@@ -32,25 +32,29 @@ public class MashroomScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //プレイヤーの方向に敵を向ける
-        if (!isDead)
-        {
-            Vector3 direction = playerController.transform.position - transform.position;
-            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
-        }//もし死んでいた時
-        else
-        {
-            animator.SetBool("isDead", true);
-        }
 
-        //攻撃アニメーションの状態を監視
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        //Attackがアニメーションのステート名と一致する場合
-        if (isDead && stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
+        if (!playerScript.isPose)
         {
-            Collect();
+            //プレイヤーの方向に敵を向ける
+            if (!isDead)
+            {
+                Vector3 direction = playerController.transform.position - transform.position;
+                float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
+            }//もし死んでいた時
+            else
+            {
+                animator.SetBool("isDead", true);
+            }
+
+            //攻撃アニメーションの状態を監視
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            //Attackがアニメーションのステート名と一致する場合
+            if (isDead && stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
+            {
+                Collect();
+            }
         }
 
     }

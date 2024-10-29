@@ -42,14 +42,19 @@ public class CactusScript : MonoBehaviour
         //プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, playerController.transform.position);
 
-        //攻撃と歩くアニメーション切り替え
-        AttackToWait(distanceToPlayer);
+        //ポーズ画面が開いていないとき
+        if (!playerScript.isPose)
+        {
+            //攻撃と歩くアニメーション切り替え
+            AttackToWait(distanceToPlayer);
 
-        //向きを変える関数
-        DirectionToPlayer();
+            //向きを変える関数
+            DirectionToPlayer();
 
-        //死んだときの関数
-        Dead();
+            //死んだときの関数
+            Dead();
+
+        }
 
     }
 
