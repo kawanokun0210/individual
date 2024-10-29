@@ -273,6 +273,8 @@ public class playerScript : MonoBehaviour
             //ポーズ画面を開く
             isPose = true;
             backCoolTime = 0;
+            //アニメーションを変更。
+            animator.SetBool("mode", false);
         }
 
     }
