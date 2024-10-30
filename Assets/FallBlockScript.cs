@@ -11,9 +11,12 @@ public class FallBlockScript : MonoBehaviour
     private bool isFalling = false;
     private float timeOnBlock = 0f;
 
+    //ゴールしたら起動しないようにする
+    public static bool isMove = true;
+
     //再度出現させるための宣言
-    private float respornTimer = 0;//リセットまでのカウント
-    private float respornTime = 7.0f;//リセットまでの時間
+    private float respawnTimer = 0;//リセットまでのカウント
+    private float respawnTime = 7.0f;//リセットまでの時間
     private Vector3 initialPosition;
     private Vector3 initialScale;
     public float respawnScaleSpeed = 2.0f;//拡大速度
@@ -33,43 +36,52 @@ public class FallBlockScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //プレイヤーがブロックの上にいる場合経過時間を増加させる
-        if (isPlayerOnBlock && !isFalling)
+        if (isMove)
         {
-            timeOnBlock += Time.deltaTime;
-
-            //指定時間が経過したら落下を開始
-            if (timeOnBlock >= fallDelay)
+            //プレイヤーがブロックの上にいる場合経過時間を増加させる
+            if (isPlayerOnBlock && !isFalling)
             {
-                StartCoroutine(Fall());
+                timeOnBlock += Time.deltaTime;
+
+                //指定時間が経過したら落下を開始
+                if (timeOnBlock >= fallDelay)
+                {
+                    StartCoroutine(Fall());
+                }
             }
+
+            //ブロックが落下していたら
+            if (isFalling)
+            {
+                //下に移動させる
+                transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+
+                //リスポーンまでの時間を図る
+                respawnTimer += Time.deltaTime;
+            }
+
+            //再度ブロックを出す
+            Spawn();
         }
+    }
 
-        //ブロックが落下していたら
-        if (isFalling)
-        {
-            //下に移動させる
-            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-
-            //リスポーンまでの時間を図る
-            respornTimer += Time.deltaTime;
-        }
-
+    //ブロックを出すときの処理
+    void Spawn()
+    {
         //指定の時間になったら
-        if(respornTimer >= respornTime && isFalling)
+        if (respawnTimer >= respawnTime && isFalling)
         {
             //元の位置に戻す
             transform.position = initialPosition;
             //拡大させながら出す
             StartCoroutine(Respawn());
             //タイマーをリセットする
-            respornTimer = 0;
+            respawnTimer = 0;
             //落下してないことにする
             isFalling = false;
             isPlayerOnBlock = false;
             timeOnBlock = 0;
         }
-
     }
 
     //プレイヤーがブロックの上に乗ったら呼ばれる

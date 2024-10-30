@@ -257,6 +257,7 @@ public class playerScript : MonoBehaviour
         if (other.gameObject.tag == "Goal")
         {
             isGoal = true;
+            FallBlockScript.isMove = false;
         }
 
         //‚à‚µ‰ñ•œƒAƒCƒeƒ€‚É“–‚½‚Á‚½‚ç

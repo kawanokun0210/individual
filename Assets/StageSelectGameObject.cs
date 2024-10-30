@@ -121,6 +121,9 @@ public class StageSelectGameObject : MonoBehaviour
         //プレイヤーの体力を元に戻す
         playerScript.remainingHP = 3;
 
+        //落ちるブロックのリセット
+        FallBlockScript.isMove = false;
+
         //ポーズ画面に関することのリセット
         PoseScript.isInput = true;
         PoseScript.blinkInterval = 0.6f;
