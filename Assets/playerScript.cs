@@ -7,6 +7,8 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class playerScript : MonoBehaviour
 {
+    
+    #region　プレイヤーの挙動に使う宣言集
     //シーンの名前
     public string nextSceneName;
     //アニメーターコントローラー
@@ -41,6 +43,7 @@ public class playerScript : MonoBehaviour
     public bool isGoal = false;
     //回復
     bool isHeel = false;
+    #endregion　
 
     //レイ用の宣言
     float rayDistance = 0.5f;

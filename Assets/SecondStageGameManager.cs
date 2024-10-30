@@ -9,6 +9,7 @@ public class SecondStageGameManager : MonoBehaviour
     public GameObject firstStage;//スフィアの参照
     public GameObject secondStage;//スフィアの参照
 
+    #region マップ作るときのプレハブ集
     //プレハブを入れる変数
     public GameObject block;//ブロックの参照
     public GameObject goal;//ゴールの参照
@@ -19,7 +20,8 @@ public class SecondStageGameManager : MonoBehaviour
     public GameObject gost;
     public GameObject moveBlock;
     public GameObject fallBlock;
-   
+    #endregion
+
     Vector3 position = Vector3.zero;
     Vector3 enemyPosition = Vector3.zero;
   

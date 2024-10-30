@@ -8,12 +8,14 @@ public class GameManagerScript : MonoBehaviour
     public GameObject firstStage;//スフィアの参照
     public GameObject secondStage;//スフィアの参照
 
+    #region マップ作るときのプレハブ集
     //プレハブを入れる変数
     public GameObject block;//ブロックの参照
     public GameObject goal;//ゴールの参照
     public GameObject enemyPrefab;//敵のPrefab
     public GameObject player;//プレイヤーの参照
     public GameObject heel;//回復アイテムの参照
+    #endregion
 
     Vector3 position = Vector3.zero;
     Vector3 enemyPosition = Vector3.zero;
