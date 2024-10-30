@@ -118,6 +118,8 @@ public class StageSelectGameObject : MonoBehaviour
         playerScript.isPose = false;
         //全ての入力を有効にする
         playerScript.isInput = true;
+        //プレイヤーの体力を元に戻す
+        playerScript.remainingHP = 3;
 
         //ポーズ画面に関することのリセット
         PoseScript.isInput = true;

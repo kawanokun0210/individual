@@ -54,6 +54,8 @@ public class OverScript : MonoBehaviour
 
         //土管のフラグを戻す
         PipeScript.isTableScene = true;
+        //プレイヤーの体力を元に戻す
+        playerScript.remainingHP = 3;
 
     }
 

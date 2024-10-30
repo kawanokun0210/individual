@@ -29,7 +29,7 @@ public class playerScript : MonoBehaviour
     //�̗͌n
     bool isHit = false;
     int coolTime = 0;
-    int remainingHP = 3;
+    public static int remainingHP = 3;
     public GameObject heartPrefab;
     private GameObject[] hearts;
     public Transform cameraTransform;
