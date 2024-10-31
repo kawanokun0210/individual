@@ -56,8 +56,8 @@ public class PoseScript : MonoBehaviour
         //常にプレイヤーと同じポジションに移動
         var playerPosition = playerController.transform.position;
         transform.position = playerPosition;
-        stageSelectText.transform.position = playerPosition + new Vector3(666.6f, 331.3f, 0);
-        backTitleText.transform.position = playerPosition + new Vector3(626.6f, 271.3f, 0);
+        stageSelectText.transform.position = playerPosition + new Vector3(866.6f, 431.3f, 0);
+        backTitleText.transform.position = playerPosition + new Vector3(826.6f, 371.3f, 0);
 
         //縦の入力待ち
         float verticalInput = Input.GetAxis("Vertical");

@@ -108,6 +108,10 @@ public class StageSelectGameObject : MonoBehaviour
 
     void ReStart()
     {
+        //タイトルで戻すもの
+        FadeScript.isInput = true;
+        FadeScript.blinkInterval = 0.6f;
+
         //ここで選択したステージフラグを全てfalseにする
         GameManagerScript.isStage = false;
 
