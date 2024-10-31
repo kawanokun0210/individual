@@ -32,13 +32,12 @@ public class SlightlyUPBlockScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //すべての衝突接触点を取得
-        foreach (ContactPoint contact in collision.contacts)
+        if (collision.gameObject.tag == "Player")
         {
-            //接触点の法線ベクトルがオブジェクトの上方向に近い場合、上からの衝突と見なす
-            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
+            // プレイヤーの接触点がブロックの上面かどうかを確認
+            foreach (ContactPoint contact in collision.contacts)
             {
-                if (collision.gameObject.tag == "Player")
+                if (Vector3.Dot(contact.normal, Vector3.down) > 0.5f)
                 {
                     playerOnBlock = true;
                     collision.transform.SetParent(transform);
@@ -51,8 +50,14 @@ public class SlightlyUPBlockScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerOnBlock = true;
-            collision.transform.SetParent(transform);
+            // プレイヤーの接触点がブロックの上面かどうかを確認
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                if (Vector3.Dot(contact.normal, Vector3.down) > 0.5f)
+                {
+                    collision.transform.SetParent(transform);
+                }
+            }
         }
     }
 
