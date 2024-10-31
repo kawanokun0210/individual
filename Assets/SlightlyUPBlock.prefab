@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5803472965086853349}
   - component: {fileID: 4284919004713699061}
   m_Layer: 0
-  m_Name: SlightlyFallBlock
+  m_Name: SlightlyUPBlock
   m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

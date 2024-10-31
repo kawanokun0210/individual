@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 780904888}
-  m_IndirectSpecularColor: {r: 0.0026408709, g: 0.28718776, b: 0.30494624, a: 1}
+  m_IndirectSpecularColor: {r: 0.0025456832, g: 0.2871772, b: 0.30497646, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 23eed364e34af274ca7af317d267dd86, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1366,6 +1366,7 @@ MonoBehaviour:
   gost: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
   moveBlock: {fileID: 8299340149405641823, guid: 67c84ebb27d464b4fbe2b63ef0f83eda, type: 3}
   fallBlock: {fileID: 2458642050264857682, guid: a9a1857fd0241ed4786b5cd8ba086ecf, type: 3}
+  slightlyBlock: {fileID: 5910345498449119451, guid: eabcb0e732447a84d8c9d4b7c43f5d54, type: 3}
   fadeImage: {fileID: 1302559125}
   fadeDuration: 1
   rotateSpeed: 0.5

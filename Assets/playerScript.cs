@@ -158,10 +158,10 @@ public class playerScript : MonoBehaviour
             animator.SetBool("jump", false);
         }
 
-        // すべての衝突接触点を取得
+        //すべての衝突接触点を取得
         foreach (ContactPoint contact in collision.contacts)
         {
-            // 接触点の法線ベクトルがオブジェクトの上方向に近い場合、上からの衝突と見なす
+            //接触点の法線ベクトルがオブジェクトの上方向に近い場合、上からの衝突と見なす
             if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
             {
                 if (collision.gameObject.tag == "Pipe")
