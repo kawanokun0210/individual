@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0026173447, g: 0.28715986, b: 0.30489856, a: 1}
+  m_IndirectSpecularColor: {r: 0.0025700405, g: 0.2871459, b: 0.30486435, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -411,7 +411,7 @@ MonoBehaviour:
   stageSelectText: {fileID: 1828601337}
   backTitleText: {fileID: 223974228}
   isBlinking: 0
-  stageBGM: {fileID: 0}
+  stageBGM: {fileID: 163042255}
   dicisionSE: {fileID: 40919617}
   cursorSE: {fileID: 40919616}
 --- !u!1 &65284393
