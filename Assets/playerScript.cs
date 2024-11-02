@@ -120,6 +120,9 @@ public class playerScript : MonoBehaviour
             //ポーズ画面を開く処理
             OpenPose();
 
+            //土管に入った時の処理
+            PipeIn();
+
         }
 
     }
@@ -266,6 +269,22 @@ public class playerScript : MonoBehaviour
             isHeel = true;
         }
 
+    }
+
+    //土管に入った時
+    void PipeIn()
+    {
+        //パイプに入っていたら
+        if (PipeScript.isMoving)
+        {
+            //アニメーションを無効にする
+            animator.enabled = false;
+        }
+        else
+        {
+            //アニメーションを有効にする
+            animator.enabled = true;
+        }
     }
 
     //ポーズを開く関数
