@@ -56,7 +56,7 @@ public class PoseScript : MonoBehaviour
         //常にプレイヤーと同じポジションに移動
         var playerPosition = playerController.transform.position;
         transform.position = playerPosition;
-        stageSelectText.transform.position = playerPosition + new Vector3(916.6f, 531.3f, 0);
+        stageSelectText.transform.position = playerPosition + new Vector3(956.6f, 531.3f, 0);
         backTitleText.transform.position = playerPosition + new Vector3(976.6f, 471.3f, 0);
 
         //縦の入力待ち
