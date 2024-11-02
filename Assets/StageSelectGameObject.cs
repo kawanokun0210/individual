@@ -126,7 +126,7 @@ public class StageSelectGameObject : MonoBehaviour
         playerScript.remainingHP = 3;
 
         //落ちるブロックのリセット
-        FallBlockScript.isMove = false;
+        FallBlockScript.isMove = true;
 
         //ポーズ画面に関することのリセット
         PoseScript.isInput = true;
