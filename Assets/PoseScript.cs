@@ -56,8 +56,8 @@ public class PoseScript : MonoBehaviour
         //常にプレイヤーと同じポジションに移動
         var playerPosition = playerController.transform.position;
         transform.position = playerPosition;
-        stageSelectText.transform.position = playerPosition + new Vector3(866.6f, 431.3f, 0);
-        backTitleText.transform.position = playerPosition + new Vector3(826.6f, 371.3f, 0);
+        stageSelectText.transform.position = playerPosition + new Vector3(916.6f, 531.3f, 0);
+        backTitleText.transform.position = playerPosition + new Vector3(976.6f, 471.3f, 0);
 
         //縦の入力待ち
         float verticalInput = Input.GetAxis("Vertical");
@@ -91,7 +91,7 @@ public class PoseScript : MonoBehaviour
             //決定した際にシーンを変更する関数
             SceneChange();
 
-            if (Input.GetKeyDown(KeyCode.JoystickButton2) && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && backCoolTime == 60)
+            if (Input.GetKeyDown(KeyCode.JoystickButton7) && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && backCoolTime == 60)
             {
                 //ポーズ画面を閉じる
                 playerScript.isPose = false;

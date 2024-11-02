@@ -272,7 +272,7 @@ public class playerScript : MonoBehaviour
     void OpenPose()
     {
         //特定のキーを押したらポーズ画面を開く
-        if (Input.GetKeyDown(KeyCode.JoystickButton2) && !isPose && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && !isPose && backCoolTime == 60)
+        if (Input.GetKeyDown(KeyCode.JoystickButton7) && !isPose && backCoolTime == 60 || Input.GetKeyDown(KeyCode.Escape) && !isPose && backCoolTime == 60)
         {
             //ポーズ画面を開く
             isPose = true;
@@ -401,7 +401,7 @@ public class playerScript : MonoBehaviour
     void Jump()
     {
         //スペース押したらジャンプ
-        if (Input.GetKeyDown(KeyCode.Space) && !isJump && isInput || Input.GetButtonDown("Fire1") && !isJump && isInput)
+        if (Input.GetKeyDown(KeyCode.Space) && !isJump && isInput || Input.GetKeyDown(KeyCode.JoystickButton0) && !isJump && isInput)
         {
             //上にジャンプさせる
             rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
@@ -437,7 +437,7 @@ public class playerScript : MonoBehaviour
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         //エンターもしくはBボタンを押したら攻撃
-        if (Input.GetKeyDown(KeyCode.Return) && !isJump && !isAttack && !isD && !isA && isInput || Input.GetButtonDown("Fire2") && !isJump && !isAttack && !isD && !isA && isInput)
+        if (Input.GetKeyDown(KeyCode.Return) && !isJump && !isAttack && !isD && !isA && isInput || Input.GetKeyDown(KeyCode.JoystickButton1) && !isJump && !isAttack && !isD && !isA && isInput)
         {
             //アニメーションを変更。
             animator.SetBool("attack", true);
