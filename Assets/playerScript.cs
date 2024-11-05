@@ -77,7 +77,7 @@ public class playerScript : MonoBehaviour
         //一度土管に入ったら土管のポジションに変更する
         if(PipeScript.isTableScene && PipeScript.isSceneChange)
         {
-            transform.position = new Vector3(11, -3.5f, 0);
+            transform.position = new Vector3(125.5f, -3.5f, 0);
         }
 
     }
