@@ -20,6 +20,7 @@ public class SecondStageScriptNo2 : MonoBehaviour
     public GameObject gost;
     public GameObject moveBlock;
     public GameObject fallBlock;
+    public GameObject slightlyBlock;
     #endregion
 
     Vector3 position = Vector3.zero;
@@ -133,6 +134,11 @@ public class SecondStageScriptNo2 : MonoBehaviour
                 if (map[y, x] == 8)
                 {
                     Instantiate(fallBlock, position, Quaternion.identity);
+                }
+                //ステージブロック生成
+                if (map[y, x] == 9)
+                {
+                    Instantiate(slightlyBlock, position, Quaternion.identity);
                 }
             }
         }

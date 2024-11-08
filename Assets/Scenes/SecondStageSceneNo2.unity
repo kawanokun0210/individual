@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1404978469}
-  m_IndirectSpecularColor: {r: 0.0026173447, g: 0.28715986, b: 0.30489856, a: 1}
+  m_IndirectSpecularColor: {r: 0.0025414473, g: 0.28704733, b: 0.30475533, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -837,6 +837,7 @@ MonoBehaviour:
   gost: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
   moveBlock: {fileID: 8299340149405641823, guid: 67c84ebb27d464b4fbe2b63ef0f83eda, type: 3}
   fallBlock: {fileID: 2458642050264857682, guid: a9a1857fd0241ed4786b5cd8ba086ecf, type: 3}
+  slightlyBlock: {fileID: 5910345498449119451, guid: eabcb0e732447a84d8c9d4b7c43f5d54, type: 3}
   fadeImage: {fileID: 1163761637}
   fadeDuration: 1
   rotateSpeed: 0.5
