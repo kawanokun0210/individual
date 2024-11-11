@@ -32,6 +32,7 @@ public class playerScript : MonoBehaviour
     bool isHit = false;
     int coolTime = 0;
     public static int remainingHP = 3;
+    const int maxHP = 3;
     public GameObject heartPrefab;
     private GameObject[] hearts;
     public Transform cameraTransform;
@@ -71,13 +72,13 @@ public class playerScript : MonoBehaviour
         //Rigidbodyを関連付ける
         rb = GetComponent<Rigidbody>();
         //ハート用
-        hearts = new GameObject[remainingHP];
+        hearts = new GameObject[maxHP];
         CreateHearts();
 
         //一度土管に入ったら土管のポジションに変更する
         if(PipeScript.isTableScene && PipeScript.isSceneChange)
         {
-            transform.position = new Vector3(125.5f, -3.5f, 0);
+            transform.position = new Vector3(11.0f, -3.5f, 0);
         }
 
     }
@@ -353,11 +354,22 @@ public class playerScript : MonoBehaviour
     //最初のハートを作る関数
     void CreateHearts()
     {
-        for (int i = 0; i < remainingHP; i++)
+        for (int i = 0; i < maxHP; i++)
         {
             GameObject heart = Instantiate(heartPrefab);
             hearts[i] = heart;
         }
+
+        //ステージ移動後ハートが減っていたら減っている分減らす
+        if(remainingHP == 2)
+        {
+            hearts[2].SetActive(false);
+        }else if(remainingHP == 1)
+        {
+            hearts[2].SetActive(false);
+            hearts[1].SetActive(false);
+        }
+
     }
 
     //ハートのポジションを固定する関数
