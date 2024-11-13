@@ -86,8 +86,6 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // カメラの位置に基づいてハートを更新
-        Vector3 offset = new Vector3(-9, 4.5f, 10); // カメラからのオフセット
 
         if (!isPose)
         {
@@ -102,9 +100,6 @@ public class playerScript : MonoBehaviour
 
             //攻撃関数
             Attack();
-
-            //ハートのポジション関数
-            UpdateHeartPositions(offset);
 
             //待機アニメーション関数
             StartIdleAnimation();
@@ -134,6 +129,9 @@ public class playerScript : MonoBehaviour
         float Xvalue = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float horizontalInput = Input.GetAxis("Horizontal");
 
+        // カメラの位置に基づいてハートを更新
+        Vector3 offset = new Vector3(-9, 4.5f, 10); // カメラからのオフセット
+
         //移動ベクトルを設定
         move = new Vector3(horizontalInput, 0, 0);
 
@@ -144,6 +142,9 @@ public class playerScript : MonoBehaviour
         {
             //移動処理
             Move(movedir, horizontalInput);
+
+            //ハートのポジション関数
+            UpdateHeartPositions(offset);
 
         }
         //レイによる当たり判定
