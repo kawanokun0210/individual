@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallDistance: 10
-  fallSpeed: 2
+  fallSpeed: 0.05
   riseSpeed: 0.5
   shakeMagnitude: 0.05
   shakeFrequency: 10
@@ -96,7 +96,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!65 &-2365656173058854833
 BoxCollider:

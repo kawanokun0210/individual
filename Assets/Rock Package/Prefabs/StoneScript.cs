@@ -5,7 +5,7 @@ using UnityEngine;
 public class StoneScript : MonoBehaviour
 {
     public float fallDistance = 10.0f;//落下距離
-    public float fallSpeed = 2.0f;
+    public float fallSpeed = 0.5f;
     public float riseSpeed = 0.5f;//上昇速度
     private playerScript playerController;
 
@@ -15,6 +15,7 @@ public class StoneScript : MonoBehaviour
 
     private Vector3 initialPosition;
     private bool isFalling = false;
+    private bool isRise = false;
     private int fallTimer = 0;
 
     // Start is called before the first frame update
@@ -33,7 +34,7 @@ public class StoneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isFalling && IsPlayerBelow())
+        if(!isFalling && IsPlayerBelow() && !isRise)
         {
             ShakeBlock();
             fallTimer++;
@@ -57,19 +58,14 @@ public class StoneScript : MonoBehaviour
     private IEnumerator Fall()
     {
         isFalling = true;
-        float elapsedTime = 0f;
-        Vector3 targetPosition = initialPosition + Vector3.down * fallDistance;
-
-        while (isFalling == true)
+       
+        while (isFalling)
         {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / fallSpeed;
-            t = t * t * (3f - 2f * t);
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
             yield return null;
         }
 
-        transform.position = targetPosition;//最終位置をセット
+        isFalling = false;//落下終了
     }
 
     //ブロックを震えさせる処理
@@ -87,19 +83,16 @@ public class StoneScript : MonoBehaviour
     //石をゆっくり上昇させるコルーチン
     private IEnumerator Rise()
     {
-        float elapsedTime = 0f;
-        Vector3 currentPosition = transform.position;
+        isRise = true;
 
-        while (transform.position != initialPosition)
+        while (transform.position.y < initialPosition.y)
         {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / riseSpeed;
-            t = t * t * (3f - 2f * t);
-            transform.position = Vector3.Lerp(currentPosition, initialPosition, t);
+            transform.position += Vector3.up * riseSpeed * Time.deltaTime;
             yield return null;
         }
 
         transform.position = initialPosition;//最終位置をセット
+        isRise = false;
     }
 
     private void OnCollisionEnter(Collision collision)
