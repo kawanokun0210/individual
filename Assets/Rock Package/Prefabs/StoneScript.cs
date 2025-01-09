@@ -40,7 +40,7 @@ public class StoneScript : MonoBehaviour
             fallTimer++;
         }
 
-        if(fallTimer >= 120)
+        if(fallTimer >= 60)
         {
             StartCoroutine(Fall());
         }
